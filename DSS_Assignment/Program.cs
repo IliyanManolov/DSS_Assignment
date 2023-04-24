@@ -1,3 +1,6 @@
+using DSS_Assignment.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DSS_Assignment
 {
     public class Program
@@ -8,6 +11,12 @@ namespace DSS_Assignment
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ApplicationDBContext>(options =>
+            {
+                //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connString);
+            });
 
             var app = builder.Build();
 

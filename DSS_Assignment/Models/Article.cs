@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DSS_Assignment.Models
 {
@@ -9,8 +10,11 @@ namespace DSS_Assignment.Models
         public string Title { get; set; }
         public string Body { get; set; }
         public string Image { get; set; }
-        public User Author { get; set; }
-        public int AuthorId { get; set; }
-        //Comments?
+
+        [ForeignKey("Users")]
+        public int UserId { get; set; }
+
+        //[ForeignKey("Comments")]
+        //public List<Comment> CommentsId { get; set; }
     }
 }
