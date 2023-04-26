@@ -1,0 +1,14 @@
+﻿@page
+@model DSS_Assignment.Models.DTO.UserDTO
+@{
+}
+
+<h2>Login Page</h2>
+
+<div>
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <input type="text" asp-for="Username" />
+        <input type="password" asp-for="Password" />
+        <button type="submit">Log in</button>
+    </form>
+</div>
