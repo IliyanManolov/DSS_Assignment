@@ -19,7 +19,7 @@ namespace DSS_Assignment.Controllers
         public IActionResult Index()
         {
             var articles = _context.Articles.ToList();
-            return View();
+            return View(articles);
         }
 
         public IActionResult Privacy()
