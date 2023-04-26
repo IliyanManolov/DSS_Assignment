@@ -20,5 +20,10 @@ namespace DSS_Assignment.Controllers
             Article article = _context.Articles.FirstOrDefault(c => c.Id == id);
             return View(article);
         }
+
+        public IActionResult WriteArticle()
+        {
+            return View();
+        }
     }
 }
