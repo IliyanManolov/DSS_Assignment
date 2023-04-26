@@ -8,17 +8,17 @@ namespace DSS_Assignment.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDBContext _context;
+        private readonly ApplicationDBContext _dbContext;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDBContext context)
         {
             _logger = logger;
-            _context = context;
+            _dbContext = context;
         }
 
         public IActionResult Index()
         {
-            var articles = _context.Articles.ToList();
+            var articles = _dbContext.Articles.ToList();
             return View(articles);
         }
 

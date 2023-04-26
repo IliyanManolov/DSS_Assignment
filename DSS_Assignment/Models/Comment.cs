@@ -10,5 +10,7 @@ namespace DSS_Assignment.Models
 
         [ForeignKey("Users")]
         public int UserId { get; set; }
+        [ForeignKey("Articles")]
+        public int ArticleId { get; set; }
     }
 }

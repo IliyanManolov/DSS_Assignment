@@ -1,4 +1,4 @@
-﻿using DSS_Assignment.Repositories;
+﻿using DSS_Assignment.Repositories.Interfaces;
 using DSS_Assignment.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -6,10 +6,10 @@ namespace DSS_Assignment.Controllers
 {
     public class ArticleController : Controller
     {
-        private readonly ApplicationDBContext _context;
+        private readonly ApplicationDBContext _dbContext;
         public ArticleController(ApplicationDBContext context)
         {
-            _context= context;
+            _dbContext= context;
         }
         public IActionResult Index(int id)
         {
@@ -17,7 +17,7 @@ namespace DSS_Assignment.Controllers
         }
         public IActionResult Detail(int id)
         {
-            Article article = _context.Articles.FirstOrDefault(c => c.Id == id);
+            Article article = _dbContext.Articles.FirstOrDefault(c => c.Id == id);
             return View(article);
         }
 
