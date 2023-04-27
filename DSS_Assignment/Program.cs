@@ -15,9 +15,15 @@ namespace DSS_Assignment
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDBContext>(options =>
             {
-                //options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connString);
+            });
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10000);
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
             });
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();

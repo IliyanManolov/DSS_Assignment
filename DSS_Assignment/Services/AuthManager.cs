@@ -5,20 +5,20 @@ namespace DSS_Assignment.Services
     public class AuthManager
     {
         private static readonly string ID = "id";
-        private IHttpContextAccessor _contextAccessor;
-        public AuthManager(IHttpContextAccessor contextAccessor)
+        private IHttpContextAccessor _httpContext;
+        public AuthManager(IHttpContextAccessor httpContext)
         {
-            _contextAccessor = contextAccessor;
+            _httpContext = httpContext;
         }
 
         public void SetSession(User user)
         {
-            _contextAccessor.HttpContext.Session.SetInt32(AuthManager.ID, user.Id);
+            _httpContext.HttpContext.Session.SetInt32(AuthManager.ID, user.Id);
         }
 
         public bool IsAuthenticated()
         {
-            var httpContext = _contextAccessor.HttpContext;
+            var httpContext = _httpContext.HttpContext;
             if (httpContext == null)
                 return false;
             var id = httpContext.Session.GetInt32(AuthManager.ID);
