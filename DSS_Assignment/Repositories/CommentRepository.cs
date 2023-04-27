@@ -13,7 +13,7 @@ namespace DSS_Assignment.Repositories
             _dbContext = dBContext;
         }
 
-        public void AddComment(Comment newcomment, User user)
+        public void AddComment(Comment newcomment)
         {
             _dbContext.Comments.Add(newcomment);
             _dbContext.SaveChanges();

@@ -1,9 +1,10 @@
 ﻿using DSS_Assignment.Data;
 using DSS_Assignment.Models;
+using DSS_Assignment.Repositories.Interfaces;
 
 namespace DSS_Assignment.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDBContext _dbContext;
         public UserRepository(ApplicationDBContext dbContext)
@@ -11,7 +12,7 @@ namespace DSS_Assignment.Repositories
             _dbContext = dbContext;
         }
 
-        public void StoreUser(User user)
+        public void AddUser(User user)
         {
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();

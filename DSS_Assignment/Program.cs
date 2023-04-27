@@ -1,4 +1,6 @@
 using DSS_Assignment.Data;
+using DSS_Assignment.Repositories;
+using DSS_Assignment.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DSS_Assignment
@@ -17,6 +19,10 @@ namespace DSS_Assignment
                 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connString);
             });
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+            builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
             var app = builder.Build();
 

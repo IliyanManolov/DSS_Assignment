@@ -1,5 +1,6 @@
 ﻿using DSS_Assignment.Data;
 using DSS_Assignment.Models;
+using DSS_Assignment.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -9,16 +10,18 @@ namespace DSS_Assignment.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDBContext _dbContext;
+        private readonly IArticleRepository _articleRepository;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDBContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDBContext context, IArticleRepository articleRepository)
         {
             _logger = logger;
             _dbContext = context;
+            _articleRepository = articleRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var articles = _dbContext.Articles.ToList();
+            IEnumerable<Article> articles = await _articleRepository.GetAll();
             return View(articles);
         }
 

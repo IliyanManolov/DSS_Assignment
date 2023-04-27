@@ -1,5 +1,6 @@
 ﻿using DSS_Assignment.Data;
 using DSS_Assignment.Models;
+using DSS_Assignment.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSS_Assignment.Controllers
@@ -7,23 +8,36 @@ namespace DSS_Assignment.Controllers
     public class ArticleController : Controller
     {
         private readonly ApplicationDBContext _dbContext;
-        public ArticleController(ApplicationDBContext context)
+        private readonly IArticleRepository _articleRepository;
+        public ArticleController(ApplicationDBContext context,IArticleRepository articleRepository)
         {
-            _dbContext= context;
+            _dbContext = context;
+            _articleRepository = articleRepository;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
-            Article article = _dbContext.Articles.FirstOrDefault(c => c.Id == id);
+            Article article = await _articleRepository.GetByIdAsync(id);
             return View(article);
         }
 
         public IActionResult WriteArticle()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriteArticle(Article article)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(article);
+            }
+            _articleRepository.AddArticle(article);
+            return RedirectToAction("Index", "Home", new { area = "Controllers"});
         }
     }
 }

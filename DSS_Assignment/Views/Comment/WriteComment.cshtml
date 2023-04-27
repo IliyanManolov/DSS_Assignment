@@ -1,0 +1,14 @@
+﻿@model Comment
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="post" asp-action="WriteComment">
+    <div class="form-group">
+        <label asp-for="Body">Your comment</label>
+        <input asp-for="Body" class="form-control" placeholder="A nice and unique comment">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,5 +1,6 @@
 ﻿using DSS_Assignment.Data;
 using DSS_Assignment.Models;
+using DSS_Assignment.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DSS_Assignment.Repositories
