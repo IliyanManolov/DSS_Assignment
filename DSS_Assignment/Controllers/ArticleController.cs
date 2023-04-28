@@ -32,8 +32,13 @@ namespace DSS_Assignment.Controllers
         [HttpPost]
         public async Task<IActionResult> WriteArticle(Article article)
         {
-            article.CommentsAmount = 0;
+            if (HttpContext.Session.GetInt32("ID") == null)
+            {
+                ViewBag.UserError = "You must be logged in to write an article";
+                return View(article);
+            }
 
+            article.CommentsAmount = 0;
             article.UserId = (int)HttpContext.Session.GetInt32("ID");
             if (!ModelState.IsValid)
             {
