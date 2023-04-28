@@ -32,6 +32,7 @@ namespace DSS_Assignment.Controllers
         [HttpPost]
         public async Task<IActionResult> WriteArticle(Article article)
         {
+            article.UserId = ViewBag.CurrentUser.Id;
             if (!ModelState.IsValid)
             {
                 return View(article);
