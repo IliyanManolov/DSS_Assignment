@@ -39,7 +39,8 @@ namespace DSS_Assignment.Controllers
                 ViewBag.Error = "User not found";
                 return View(user);
             }
-            HttpContext.Session.SetInt32("id", user.Id);
+            HttpContext.Session.SetInt32("ID", currentUser.Id); //CASE SENSITIVE
+            
 			return RedirectToAction("WriteArticle", "Article", new { area = "Controllers" });
 			//return RedirectToAction("Index", "Home", new { area = "Controllers" });
 		}

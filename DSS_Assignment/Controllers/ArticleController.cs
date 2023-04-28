@@ -33,9 +33,8 @@ namespace DSS_Assignment.Controllers
         public async Task<IActionResult> WriteArticle(Article article)
         {
             article.CommentsAmount = 0;
-            var context = HttpContext.Session.Id;
-            var context2 = HttpContext.Session.Id.ToString();
-            article.UserId = int.Parse(HttpContext.Session.Id);
+
+            article.UserId = (int)HttpContext.Session.GetInt32("ID");
             if (!ModelState.IsValid)
             {
                 return View(article);
