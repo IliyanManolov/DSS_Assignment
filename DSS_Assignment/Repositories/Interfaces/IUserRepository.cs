@@ -6,5 +6,6 @@ namespace DSS_Assignment.Repositories.Interfaces
     {
         public void AddUser(User user);
         public User? GetUser(string name, string password);
+        public User? GetUserByID(int id);
     }
 }

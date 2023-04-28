@@ -22,5 +22,11 @@ namespace DSS_Assignment.Repositories
 		{
             return _dbContext.Users.FirstOrDefault(user => user.Name == name && user.Password == password);
 		}
+
+		public User? GetUserByID(int id)
+		{
+            User? user = _dbContext.Users.FirstOrDefault(u => u.Id == id);
+            return user;
+		}
 	}
 }

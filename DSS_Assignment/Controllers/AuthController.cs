@@ -39,8 +39,9 @@ namespace DSS_Assignment.Controllers
                 ViewBag.Error = "User not found";
                 return View(user);
             }
-            ViewBag.CurrentUser = currentUser;
-			return RedirectToAction("Index", "Home", new { area = "Controllers" });
+            //ViewBag.CurrentUser = currentUser;
+			return RedirectToAction("WriteArticle", "Article", new { area = "Controllers" });
+			//return RedirectToAction("Index", "Home", new { area = "Controllers" });
 		}
 
 		public IActionResult Register()
