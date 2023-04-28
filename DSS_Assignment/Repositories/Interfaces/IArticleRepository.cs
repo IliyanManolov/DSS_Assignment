@@ -7,6 +7,6 @@ namespace DSS_Assignment.Repositories.Interfaces
         Task<IEnumerable<Article>> GetAll();
         Task<Article> GetByIdAsync(int id);
         public void AddArticle(Article newarticle);
-        public void DeleteArticle(Article article, int userID);
+        public bool DeleteArticle(Article article, int userID);
     }
 }

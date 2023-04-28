@@ -47,5 +47,33 @@ namespace DSS_Assignment.Controllers
             _articleRepository.AddArticle(article);
             return RedirectToAction("Index", "Home", new { area = "Controllers"});
         }
+
+        public IActionResult DeleteArticle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteArticle(Article article)
+        {
+            if (!_articleRepository.DeleteArticle(article, (int)HttpContext.Session.GetInt32("ID")))
+            {
+                if (HttpContext.Session.GetInt32("ID") == null)
+                {
+                    ViewBag.DeleteStatus = "You must be logged in to delete an article!";
+                    return View();
+                }
+                else
+                {
+                ViewBag.DeleteStatus = "You cannot delete someone else's article!";
+                return View();
+                }
+            }
+            else
+            {
+                ViewBag.DeleteStatus = "Your article has been successfully deleted!";
+                return View();
+            }
+        }
     }
 }

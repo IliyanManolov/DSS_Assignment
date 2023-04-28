@@ -19,14 +19,16 @@ namespace DSS_Assignment.Repositories
             _dbContext.SaveChanges();            
         }
 
-        public void DeleteArticle(Article article, int userID)
+        public bool DeleteArticle(Article article, int userID)
         {
             if (userID == article.UserId)
-            { 
+            {
                 _dbContext.Articles.Remove(article);
                 _dbContext.SaveChanges();
-                return;
+                return true;
             }
+            else
+                return false;
         }
 
         public async Task<IEnumerable<Article>> GetAll()
