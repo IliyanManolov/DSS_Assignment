@@ -25,18 +25,25 @@ namespace DSS_Assignment.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Login(User user)
-        //{
-        //    if (user == null)
-        //    {
-        //        ViewBag.Error = "There is no user";
-        //        return View(user);
-        //    }
-        //    User? user = _userRepository.
-        //}
-        
-        public IActionResult Register()
+        [HttpPost]
+		public async Task<IActionResult> Login(User user)
+        {
+            if (user == null)
+            {
+                ViewBag.Error = "There is no user";
+                return View(user);
+            }
+            User currentUser = _userRepository.GetUser(user.Name, user.Password);
+            if (currentUser == null)
+            {
+                ViewBag.Error = "User not found";
+                return View(user);
+            }
+            ViewBag.CurrentUser = currentUser;
+			return RedirectToAction("Index", "Home", new { area = "Controllers" });
+		}
+
+		public IActionResult Register()
         {
             return View();
         }
@@ -44,7 +51,13 @@ namespace DSS_Assignment.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
             _userRepository.AddUser(user);
+            ViewBag.CurrentUser = user;
 			return RedirectToAction("Index", "Home", new { area = "Controllers" });
 		}
 	}

@@ -17,5 +17,10 @@ namespace DSS_Assignment.Repositories
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
         }
-    }
+
+		public User? GetUser(string name, string password)
+		{
+            return _dbContext.Users.FirstOrDefault(user => user.Name == name && user.Password == password);
+		}
+	}
 }

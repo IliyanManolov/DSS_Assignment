@@ -1,14 +1,17 @@
-﻿using DSS_Assignment.Models;
+﻿using DSS_Assignment.Data;
+using DSS_Assignment.Models;
 
 namespace DSS_Assignment.Services
 {
     public class AuthManager
     {
         private static readonly string ID = "id";
-        private IHttpContextAccessor _httpContext;
-        public AuthManager(IHttpContextAccessor httpContext)
+        private readonly IHttpContextAccessor _httpContext;
+        private readonly ApplicationDBContext _dbContext;
+        public AuthManager(ApplicationDBContext dbContext, IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
+            _dbContext = dbContext;
         }
 
         public void SetSession(User user)

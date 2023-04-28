@@ -1,4 +1,4 @@
-﻿@model DSS_Assignment.Models.User
+﻿@model User
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -13,9 +13,7 @@
 }
 else
 {*@
-    <div>
-
-        <form asp-controller="Auth" asp-action="Login" method="post">
+	<form asp-controller="Auth" method="post" asp-action="Login">
 		<div class="form-group">
 			<label asp-for="Name">Name</label>
 			<input asp-for="Name" class="form-control" placeholder="Your Username">
@@ -26,6 +24,5 @@ else
 			<input asp-for="Password" class="form-control" placeholder="Your Password">
 		</div>
 		<button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
+    </form>
 @*}*@
