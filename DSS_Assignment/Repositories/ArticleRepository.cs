@@ -19,9 +19,9 @@ namespace DSS_Assignment.Repositories
             _dbContext.SaveChanges();            
         }
 
-        public void DeleteArticle(Article article, User user)
+        public void DeleteArticle(Article article, int userID)
         {
-            if (user.Id == article.UserId)
+            if (userID == article.UserId)
             { 
                 _dbContext.Articles.Remove(article);
                 _dbContext.SaveChanges();

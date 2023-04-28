@@ -19,12 +19,8 @@ namespace DSS_Assignment.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void DeleteComment(Comment comment, User user)
+        public void DeleteComment(Comment comment)
         {
-            if (user.Id != comment.UserId)
-            {
-                return;
-            }
             _dbContext.Comments.Remove(comment);
             _dbContext.SaveChanges();
         }

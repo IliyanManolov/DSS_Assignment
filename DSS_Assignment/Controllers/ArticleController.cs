@@ -32,8 +32,10 @@ namespace DSS_Assignment.Controllers
         [HttpPost]
         public async Task<IActionResult> WriteArticle(Article article)
         {
-            //User? currentuser = ViewBag.CurrentUser;
-            //article.UserId = currentuser.Id;
+            article.CommentsAmount = 0;
+            var context = HttpContext.Session.Id;
+            var context2 = HttpContext.Session.Id.ToString();
+            article.UserId = int.Parse(HttpContext.Session.Id);
             if (!ModelState.IsValid)
             {
                 return View(article);

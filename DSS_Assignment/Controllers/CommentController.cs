@@ -20,10 +20,10 @@ namespace DSS_Assignment.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> WriteComment(Comment comment, Article article, User user) //possibly change to receive only the comment + article ID
+        public async Task<IActionResult> WriteComment(Comment comment) //possibly change to receive only the comment + article ID
         {
-            comment.ArticleId = article.Id;
-            comment.UserId = user.Id;
+            //comment.ArticleId = ;
+            comment.UserId = int.Parse(HttpContext.Session.Id);
             if (!ModelState.IsValid)
             {
                 return View();
