@@ -7,14 +7,8 @@ namespace DSS_Assignment.Controllers
 {
     public class AuthController : Controller
     {
-        //private readonly AuthManager _authManager;
         private readonly IUserRepository _userRepository;
 
-        //public AuthController(AuthManager authManager, IUserRepository userRepository)
-        //{
-        //    _authManager = authManager;
-        //    _userRepository = userRepository;
-        //}
         public AuthController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -41,8 +35,7 @@ namespace DSS_Assignment.Controllers
             }
             HttpContext.Session.SetInt32("ID", currentUser.Id); //CASE SENSITIVE
             
-			return RedirectToAction("WriteArticle", "Article", new { area = "Controllers" });
-			//return RedirectToAction("Index", "Home", new { area = "Controllers" });
+			return RedirectToAction("Index", "Home", new { area = "Controllers" });
 		}
 
 		public IActionResult Register()

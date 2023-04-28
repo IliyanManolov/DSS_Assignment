@@ -32,8 +32,8 @@
                                 <a type="btn btn-success" asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                 <a type="btn btn-success" asp-controller="Comment" asp-action="WriteComment" asp-route-id="@article.Id" type="button" class="btn btn-sm btn-outline-secondary">Comment</a>
                                 <a type="btn btn-success" asp-controller="Comment" asp-action="ShowAllComments" typeof="button" class="btn btn-sm btn-outline-secondary"> @article.CommentsAmount Comments</a>
+                                <a type="btn btn-success" asp-controller="Article" asp-action="DeleteArticle" asp-route-id="@article.Id" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
                             </div>
-                          @*  <small class="text-muted">@article.</small>*@
                         </div>
                     </div>
                 </div>
