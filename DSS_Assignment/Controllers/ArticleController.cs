@@ -55,14 +55,15 @@ namespace DSS_Assignment.Controllers
             var sessionID = HttpContext.Session.GetInt32("ID");
             if (sessionID == null)
             {
+                ViewBag.Session = false;
                 ViewBag.DeleteStatus = "You must be logged in to delete an article!";
                 return View(article);
             }
+            ViewBag.Session = true;
             if (!_articleRepository.DeleteArticle(article, (int)sessionID))
             {
-
-                    ViewBag.DeleteStatus = "You cannot delete someone else's article!";
-                    return View(article);
+                ViewBag.DeleteStatus = "You cannot delete someone else's article!";
+                return View(article);
             }
             else
             {
