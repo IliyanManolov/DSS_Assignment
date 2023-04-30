@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Comment>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>TESTING</h1>
+
+@foreach (Comment item in Model)
+{
+    <div class="comment mt-4 text-justify float-left">
+        <span>@item.Created.ToString("MM/dd/yyyy hh:mm tt")</span>
+        <br>
+        <p>@item.Body</p>
+        <a type="btn btn-success" asp-controller="Comment" asp-action="DeleteComment" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Delete</a>
+        <a type="btn btn-success" asp-controller="Comment" asp-action="WriteComment" asp-route-id="@item.ArticleId" type="button" class="btn btn-sm btn-outline-secondary">Comment</a>
+        <a type="btn btn-success" asp-controller="Article" asp-action="Detail" asp-route-id="@item.ArticleId" type="button" class="btn btn-sm btn-outline-secondary">View the article</a>
+    </div>    
+}

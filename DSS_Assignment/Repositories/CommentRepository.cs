@@ -19,10 +19,16 @@ namespace DSS_Assignment.Repositories
             _dbContext.SaveChanges();
         }
 
-        public void DeleteComment(Comment comment)
+        public bool DeleteComment(Comment comment, int userid)
         {
-            _dbContext.Comments.Remove(comment);
-            _dbContext.SaveChanges();
+            if (comment.UserId == userid)
+            {
+                _dbContext.Comments.Remove(comment);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            else
+                return false;
         }
 
         public async Task<IEnumerable<Comment>> GetAllByArticle(int id)
@@ -30,11 +36,15 @@ namespace DSS_Assignment.Repositories
             return await _dbContext.Comments.Where(i => i.ArticleId == id).ToListAsync();
         }
 
-        public List<Comment> SortCommentsByCreation(List<Comment> list)
+        public async Task<Comment> GetCommentById(int id)
         {
-            //should work?
-            list = (List<Comment>)list.OrderBy(i => i.Created);
-            return list;
+            return await _dbContext.Comments.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        public async Task<IEnumerable<Comment>> SortCommentsByCreation(IEnumerable<Comment> commentslist)
+        {
+            commentslist = commentslist.OrderBy(i => i.Created);
+            return commentslist;
         }
     }
 }

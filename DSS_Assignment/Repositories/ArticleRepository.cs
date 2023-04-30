@@ -56,7 +56,7 @@ namespace DSS_Assignment.Repositories
         {
             Article? article = _dbContext.Articles.FirstOrDefault(x => x.Id == id);
             article.CommentsAmount--;
-            _dbContext.Articles.Update(article);
+            //_dbContext.Articles.Update(article);
             _dbContext.SaveChanges();
             return;
         }

@@ -31,10 +31,12 @@ namespace DSS_Assignment.Controllers
                 ViewBag.Error = "You must be logged in to comment!";
                 return View(comment);
             }
+
             comment.UserId = (int)HttpContext.Session.GetInt32("ID");
             Article? article = await _articleRepository.GetByIdAsync(id);
             comment.ArticleId = article.Id;
             comment.Created = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 ViewBag.Error = "No text entered!";
@@ -43,6 +45,35 @@ namespace DSS_Assignment.Controllers
             _articleRepository.AddArticleCommentById(id);
             _commentRepository.AddComment(comment);
             return RedirectToAction("Index", "Home", new { area = "Controllers" });
+        }
+        public async Task<IActionResult> ShowArticleComments(int id)
+        {
+            IEnumerable<Comment> comments = await _commentRepository.GetAllByArticle(id);
+            comments = await _commentRepository.SortCommentsByCreation(comments);
+            return View(comments);
+        }
+
+        public async Task<IActionResult> DeleteComment(int id)
+        {
+            Comment? comment = await _commentRepository.GetCommentById(id);
+            var sessionID = HttpContext.Session.GetInt32("ID");
+            if (sessionID == null)
+            {
+                ViewBag.DeleteStatus = "You must be logged in to delete a comment!";
+                return View(comment);
+            }
+            ViewBag.Session = true;
+            if (!_commentRepository.DeleteComment(comment, (int)sessionID))
+            {
+                ViewBag.DeleteStatus = "You cannot delete someone else's article!";
+                return View(comment);
+            }
+            else
+            {
+                _articleRepository.RemoveArticleCommentById(comment.ArticleId);
+                ViewBag.DeleteStatus = "Your comment has been successfully deleted!";
+                return View(comment);
+            }
         }
     }
 }

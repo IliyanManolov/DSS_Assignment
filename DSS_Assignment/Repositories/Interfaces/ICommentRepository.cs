@@ -6,7 +6,8 @@ namespace DSS_Assignment.Repositories.Interfaces
     {
         Task<IEnumerable<Comment>> GetAllByArticle(int id);
         public void AddComment(Comment newcomment);
-        public void DeleteComment(Comment comment);
-        public List<Comment> SortCommentsByCreation(List<Comment> list);
+        public bool DeleteComment(Comment comment, int userid);
+        public Task<IEnumerable<Comment>> SortCommentsByCreation(IEnumerable<Comment> list);
+        public Task<Comment> GetCommentById(int id);
     }
 }
