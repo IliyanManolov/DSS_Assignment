@@ -55,5 +55,40 @@ namespace DSS_Assignment_Tests
 			var result = authController.Login(usr);
 			Assert.Equal(null, authController.ViewBag.Error);
 		}
+		[Fact]
+		public void Register()
+		{
+			var mockUserRepository = new Mock<IUserRepository>();
+			var mockSession = new Mock<ISession>();
+
+			var authController = new AuthController(mockUserRepository.Object);
+			authController.ControllerContext = new ControllerContext
+			{
+				HttpContext = new DefaultHttpContext { Session = mockSession.Object }
+			};
+
+			var usr = new User { Name = "test", Password = "testpass" };
+			var result = authController.Register(usr);
+			Assert.Equal(usr, authController.ViewBag.CurrentUser);
+		}
+		[Fact]
+		public void FailedRegisterNoName()
+		{
+			var mockUserRepository = new Mock<IUserRepository>();
+			var mockSession = new Mock<ISession>();
+
+			var authController = new AuthController(mockUserRepository.Object);
+			authController.ControllerContext = new ControllerContext
+			{
+				HttpContext = new DefaultHttpContext { Session = mockSession.Object }
+			};
+
+			var usr = new User { Password = "testpass" };
+			var result = authController.Register(usr);
+
+			//For some reason mocking BYPASSES the ModelState.IsValid check
+			//this test should be passing but the "bug" (?) causes it to fail
+			Assert.Equal("No name given", authController.ViewBag.RegisterError);
+		}
 	}
 }
