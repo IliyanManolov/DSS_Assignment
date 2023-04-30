@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSS_Assignment", "DSS_Assignment\DSS_Assignment.csproj", "{B417A87E-509A-4815-B21D-3EA4A7DD7DAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSS_Assignment_Tests", "DSS_Assignment_Tests\DSS_Assignment_Tests.csproj", "{E4732E5D-26FE-470C-B74D-F82BA49AF440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B417A87E-509A-4815-B21D-3EA4A7DD7DAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B417A87E-509A-4815-B21D-3EA4A7DD7DAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B417A87E-509A-4815-B21D-3EA4A7DD7DAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4732E5D-26FE-470C-B74D-F82BA49AF440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4732E5D-26FE-470C-B74D-F82BA49AF440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4732E5D-26FE-470C-B74D-F82BA49AF440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4732E5D-26FE-470C-B74D-F82BA49AF440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
