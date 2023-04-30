@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DSS_Assignment.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20230427203453_fix")]
+    [Migration("20230429155455_fix")]
     partial class fix
     {
         /// <inheritdoc />

@@ -19,6 +19,16 @@ namespace DSS_Assignment.Repositories
             _dbContext.SaveChanges();            
         }
 
+        //Incrases the amount of comments that the article has in the database
+        public void AddArticleCommentById(int id)
+        {
+            Article? article = _dbContext.Articles.FirstOrDefault(x => x.Id == id);
+            article.CommentsAmount++;
+            //_dbContext.Articles.Update(article);
+            _dbContext.SaveChanges();
+            return;
+        }
+
         public bool DeleteArticle(Article article, int userID)
         {
             if (userID == article.UserId)
@@ -39,6 +49,16 @@ namespace DSS_Assignment.Repositories
         public async Task<Article> GetByIdAsync(int id)
         {
             return await _dbContext.Articles.FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        //Decreases the amount of comments that the article has in the database
+        public void RemoveArticleCommentById(int id)
+        {
+            Article? article = _dbContext.Articles.FirstOrDefault(x => x.Id == id);
+            article.CommentsAmount--;
+            _dbContext.Articles.Update(article);
+            _dbContext.SaveChanges();
+            return;
         }
     }
 }
