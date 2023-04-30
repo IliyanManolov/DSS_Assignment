@@ -46,6 +46,7 @@ namespace DSS_Assignment.Controllers
             _commentRepository.AddComment(comment);
             return RedirectToAction("Index", "Home", new { area = "Controllers" });
         }
+        [HttpGet]
         public async Task<IActionResult> ShowArticleComments(int id)
         {
             IEnumerable<Comment> comments = await _commentRepository.GetAllByArticle(id);
@@ -53,6 +54,7 @@ namespace DSS_Assignment.Controllers
             return View(comments);
         }
 
+        [HttpGet]
         public async Task<IActionResult> DeleteComment(int id)
         {
             Comment? comment = await _commentRepository.GetCommentById(id);

@@ -14,10 +14,7 @@ namespace DSS_Assignment.Controllers
             _dbContext = context;
             _articleRepository = articleRepository;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+
         public async Task<IActionResult> Detail(int id)
         {
             Article article = await _articleRepository.GetByIdAsync(id);
@@ -29,7 +26,7 @@ namespace DSS_Assignment.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> WriteArticle(Article article)
         {
             if (HttpContext.Session.GetInt32("ID") == null)
@@ -48,7 +45,7 @@ namespace DSS_Assignment.Controllers
             return RedirectToAction("Index", "Home", new { area = "Controllers"});
         }
 
-        //[HttpPost]
+        [HttpGet]
         public async Task<IActionResult> DeleteArticle(int id)
         {
             Article? article = await _articleRepository.GetByIdAsync(id);
