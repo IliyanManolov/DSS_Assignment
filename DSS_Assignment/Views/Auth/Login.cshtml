@@ -5,14 +5,10 @@
 @{
 }
 
-<h2>Login Page</h2>
+<h1>Login Page</h1>
 
-@*@if (ViewBag.Error != null)
-{
-    <h2>@ViewBag.Error</h2>
-}
-else
-{*@
+<h1>@ViewBag.Error</h1>
+
 <form asp-controller="Auth" asp-action="Login" method="post">
 		<div class="form-group">
 			<label asp-for="Name">Name</label>

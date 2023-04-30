@@ -48,6 +48,10 @@ namespace DSS_Assignment.Controllers
 
             if (!ModelState.IsValid)
             {
+                if (user.Name == null)
+                    ViewBag.RegisterError = "No name given";
+                else if (user.Password == null)
+                    ViewBag.RegisterError = "No password given";
                 return View(user);
             }
             HttpContext.Session.SetInt32("id", user.Id);
