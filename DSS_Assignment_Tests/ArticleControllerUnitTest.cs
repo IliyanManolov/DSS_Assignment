@@ -16,7 +16,10 @@ using Xunit;
 
 namespace DSS_Assignment_Tests
 {
-	public  class ArticleControllerUnitTest
+    //IMPORTANT
+    //For some reason when testing with mocking the HttpContext.Session.GetInt32("ID") == null check in the controller runs into an exceptions
+	//All of the tests work correctly when manually done, only fail with mock tests
+    public class ArticleControllerUnitTest
 	{
 		public ArticleControllerUnitTest()
 		{
@@ -47,9 +50,8 @@ namespace DSS_Assignment_Tests
 
 			var usr = new User { Id = 1, Name = "test", Password = "testpass" };
 			authController.HttpContext.Session.SetInt32("ID", usr.Id);
-			var sesid = authController.HttpContext.Session.GetInt32("ID");
 
-			var article = new Article { Id = 1, Body = "testbody", CommentsAmount = 0, Image = "testimage", Title = "testtitle"};
+			var article = new Article { Id = 1, Body = "testbody", Image = "testimage", Title = "testtitle", UserId = usr.Id};
 			var result = articleController.WriteArticle(article);
 			Assert.NotNull(mockDbContext.Articles);
 		}
@@ -74,6 +76,46 @@ namespace DSS_Assignment_Tests
             {
                 HttpContext = new DefaultHttpContext { Session = mockSession.Object }
             };
+
+            var usr = new User { Id = 1, Name = "test", Password = "testpass" };
+            var article = new Article { Id = 1, Body = "", Title = "testtitle", UserId = usr.Id};
+            authController.HttpContext.Session.SetInt32("ID", usr.Id);
+
+
+            var result = articleController.WriteArticle(article);
+			Assert.Null(mockDbContext.Articles);
+        }
+		[Fact]
+		public void RemoveArticle()
+		{
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDBContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var mockDbContext = new ApplicationDBContext(optionsBuilder.Options);
+
+            var usr = new User { Id = 1, Name = "test", Password = "testpass" };
+
+            var article = new Article { Id = 1, Body = "testbody", Image = "testimage", Title = "testtitle", UserId = usr.Id };
+
+            var mockUserRepository = new Mock<IUserRepository>();
+            mockUserRepository.Setup(repo => repo.GetUser("test", "testpass"))
+                .Returns(new User { Id = 1, Name = "test", Password = "testpass" });
+            var mockSession = new Mock<ISession>();
+
+            var mockArticleRepository = new Mock<IArticleRepository>();
+            mockArticleRepository.Setup(repo => repo.DeleteArticle(article, usr.Id))
+                .Returns(true);
+
+            var authController = new AuthController(mockUserRepository.Object);
+            var articleController = new ArticleController(mockDbContext, mockArticleRepository.Object);
+
+            authController.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext { Session = mockSession.Object }
+            };
+            authController.HttpContext.Session.SetInt32("ID", usr.Id);
+
+            var result = articleController.DeleteArticle(article.Id);
+            Assert.Null(mockDbContext.Articles);
         }
     }
 
