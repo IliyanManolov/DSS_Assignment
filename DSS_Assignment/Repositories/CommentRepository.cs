@@ -43,7 +43,7 @@ namespace DSS_Assignment.Repositories
 
         public async Task<IEnumerable<Comment>> SortCommentsByCreation(IEnumerable<Comment> commentslist)
         {
-            commentslist = commentslist.OrderBy(i => i.Created);
+            commentslist = commentslist.OrderBy(i => i.Created).Reverse<Comment>();
             return commentslist;
         }
     }
