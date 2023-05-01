@@ -87,7 +87,7 @@ namespace DSS_Assignment_Tests
 			var result = authController.Register(usr);
 
 			//For some reason mocking BYPASSES the ModelState.IsValid check
-			//this test should be passing but the "bug" (?) causes it to fail
+			//this test passes when tested manually but the "bug" (?) causes it to fail
 			Assert.Equal("No name given", authController.ViewBag.RegisterError);
 		}
 	}
