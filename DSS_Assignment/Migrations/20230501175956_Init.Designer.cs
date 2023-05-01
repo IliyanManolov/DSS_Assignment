@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DSS_Assignment.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20230501090831_modelfixes")]
-    partial class modelfixes
+    [Migration("20230501175956_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
