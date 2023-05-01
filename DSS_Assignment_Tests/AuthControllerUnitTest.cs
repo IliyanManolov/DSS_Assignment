@@ -83,7 +83,7 @@ namespace DSS_Assignment_Tests
 				HttpContext = new DefaultHttpContext { Session = mockSession.Object }
 			};
 
-			var usr = new User { Password = "testpass" };
+			var usr = new User { Name = null ,Password = "testpass" };
 			var result = authController.Register(usr);
 
 			//For some reason mocking BYPASSES the ModelState.IsValid check
