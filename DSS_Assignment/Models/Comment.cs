@@ -7,6 +7,7 @@ namespace DSS_Assignment.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public string Body { get; set; }
         public DateTime Created { get; set; }
 
