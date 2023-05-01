@@ -46,6 +46,7 @@ namespace DSS_Assignment.Controllers
             _commentRepository.AddComment(comment);
             return RedirectToAction("Index", "Home", new { area = "Controllers" });
         }
+
         [HttpGet]
         public async Task<IActionResult> ShowArticleComments(int id)
         {

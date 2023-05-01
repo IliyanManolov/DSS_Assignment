@@ -26,7 +26,7 @@ namespace DSS_Assignment.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> WriteArticle(Article article)
         {
             if (HttpContext.Session.GetInt32("ID") == null)

@@ -25,7 +25,7 @@ namespace DSS_Assignment.Controllers
             return View(articles);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Resources()
         {
             return View();
         }
