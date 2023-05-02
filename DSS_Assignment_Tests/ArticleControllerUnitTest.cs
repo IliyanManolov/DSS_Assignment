@@ -17,7 +17,7 @@ using Xunit;
 namespace DSS_Assignment_Tests
 {
     //IMPORTANT
-    //For some reason when testing with mocking the HttpContext.Session.GetInt32("ID") == null check in the controller runs into an exceptions
+    //For some reason when testing with mocking the HttpContext.Session.GetInt32("ID") == null check in the controller runs into an exception
 	//All of the tests work correctly when manually done, only fail with mock tests
     public class ArticleControllerUnitTest
 	{
@@ -36,9 +36,10 @@ namespace DSS_Assignment_Tests
 			var mockUserRepository = new Mock<IUserRepository>();
 			mockUserRepository.Setup(repo => repo.GetUser("test", "testpass"))
 				.Returns(new User { Id = 1, Name = "test", Password = "testpass" });
-			var mockSession = new Mock<ISession>();
 
 			var mockArticleRepository = new Mock<IArticleRepository>();
+
+			var mockSession = new Mock<ISession>();
 
 			var authController = new AuthController(mockUserRepository.Object);
 			var articleController = new ArticleController(mockDbContext, mockArticleRepository.Object);
@@ -63,11 +64,9 @@ namespace DSS_Assignment_Tests
             var mockDbContext = new ApplicationDBContext(optionsBuilder.Options);
 
             var mockUserRepository = new Mock<IUserRepository>();
-            mockUserRepository.Setup(repo => repo.GetUser("test", "testpass"))
-                .Returns(new User { Id = 1, Name = "test", Password = "testpass" });
-            var mockSession = new Mock<ISession>();
-
             var mockArticleRepository = new Mock<IArticleRepository>();
+
+            var mockSession = new Mock<ISession>();
 
             var authController = new AuthController(mockUserRepository.Object);
             var articleController = new ArticleController(mockDbContext, mockArticleRepository.Object);

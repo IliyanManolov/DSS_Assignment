@@ -56,7 +56,7 @@ namespace DSS_Assignment.Controllers
                 ViewBag.DeleteStatus = "You must be logged in to delete an article!";
                 return View(article);
             }
-            ViewBag.Session = true;
+
             if (!_articleRepository.DeleteArticle(article, (int)sessionID))
             {
                 ViewBag.DeleteStatus = "You cannot delete someone else's article!";
