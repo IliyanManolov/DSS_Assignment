@@ -54,7 +54,7 @@ namespace DSS_Assignment.Controllers
                     ViewBag.RegisterError = "No password given";
                 return View(user);
             }
-            HttpContext.Session.SetInt32("id", user.Id);
+            HttpContext.Session.SetInt32("ID", user.Id);
             _userRepository.AddUser(user);
             ViewBag.CurrentUser = user;
 			return RedirectToAction("Index", "Home", new { area = "Controllers" });
