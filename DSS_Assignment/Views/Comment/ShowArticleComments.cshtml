@@ -7,7 +7,7 @@
 
 @foreach (Comment item in Model)
 {
-    <div class="comment mt-4 text-justify float-left" style="outline: 2px solid black">
+    <div class="comment mt-4 text-justify float-left" style="outline: 2px solid black; background-color: burlywood">
         <span>@item.Created.ToString("MM/dd/yyyy hh:mm tt")</span>
         <br>
         <p>@item.Body</p>
